@@ -2,16 +2,16 @@ require 'open-uri'
 require 'pry'
 
 class WisconsinParks::Scrape
-attr_accessor :park_information , :park_webpage
+attr_accessor :park_information , :park_website
 
 def initialize
-@park_webpage = "https://www.nps.gov/state/wi/list.htm?program=parks"
+@park_website = "https://www.nps.gov/state/wi/list.htm?program=parks"
 @park_information = []
 end 
 
 
 def scrape_website
-html = open(@park_webpage)
+html = open(@park_website)
 doc = Nokogiri::HTML(html)
 park_names = doc.css("li.clearfix")
 park_names.each_with_index do |name, index|
@@ -33,7 +33,7 @@ def basic_information
     
 
       if directions.empty?
-        directions = "Diections not available."
+        directions = "Directions not available."
       end 
 
     

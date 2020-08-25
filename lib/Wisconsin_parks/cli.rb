@@ -1,55 +1,74 @@
+
 class WisconsinParks::CLI
 
 attr_accessor :location
 
 def start
-   parks = WisconsinParks::Scrape.new
-   parks.scrape_website
-   parks.basic_information
-   welcome
-   select_parks
-
+    parks = WisconsinParks::Scrape.new
+    parks.scrape_website
+    parks.basic_information
+    welcome
+    select_parks
+    goodbye
 end 
 
 def welcome
- puts "Hi, welcome to National Parks of Wisconsin"
-puts "Wisconsin is filled with beautiful parks"
-# puts "Here is a list of National Parks in Wisconsin"
+    puts "Hi, welcome to the state of Wisconsin"
+    puts "Here is a list of places to visit in Wisconsin"
+  
 end 
-
- 
 
 def parks_list
 
-puts "Please select the park to get more information or type exit"
-@location = WisconsinParks::Parks.all
-@location.each do|park|
-    puts "#{park.index}. #{park.name}"
-end 
-end 
+     puts "Please type a number of the park you want more information about or type exit"
+     @location = WisconsinParks::Parks.all
+     @location.each do|park|
+     puts "#{park.index}. #{park.name}"
+    end 
 
+end 
 
 def select_parks
-user_input = nil
-while user_input != 'exit'
+    user_input = nil
+  while user_input != 'exit'
     parks_list
-user_input = gets.strip
-input = user_input.to_i
-if input.between?(1,@location.size)
-    more_info(@location[input - 1])
-elsif !input.between?(1,@location.size)&& input!= "exit"
-    puts "Please choose a number between 1 and #{@places.size} or exit"
-end 
-end 
+    user_input = gets.strip
+    input = user_input.to_i
+    if input.between?(1,@location.size)
+    park_details(@location[input - 1])
+    elsif !input.between?(1,@location.size) && input != "exit"
+     puts "Please type a number between 1 and #{@location.size} or exit."
+     end 
+
+  end 
 end 
 
+def park_details(park)
+    puts "#{park.name} seems like a fun place to visit."
+    puts "Please enter a number to view more information or type exit."
+
+    puts "1. Address"
+    puts "2. Directions"
+    user_input = nil
+
+    while user_input != 'exit'
+        user_input = gets.strip
+        input = user_input.to_i
+        if input.between?(1,2)
+            if input == 1
+               puts "#{park.address}"
+            elsif input == 2
+               puts "#{park.directions}"
+            end 
+            else 
+               puts "Enter a number or exit"
+            end 
+        end 
+    end 
+
+def goodbye
+    puts "Thank you for visiting, until next time!"
+end 
 
 end 
  
-
-# def more_info(park)
-#     puts "#{park.name} seems fun to visit"
-#     puts "" 
-
-
-# end 
