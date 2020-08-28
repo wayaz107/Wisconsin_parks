@@ -1,7 +1,7 @@
 
 class WisconsinParks::CLI
 
-  attr_accessor :location
+  attr_accessor :parks
 
 def start
   parks = WisconsinParks::Scrape.new
@@ -21,32 +21,30 @@ def welcome
 end 
 
 def parks_list
-
+  puts ""
   puts "Please type the number of the park you want more information about or type exit."
   puts ""
-  @location = WisconsinParks::Parks.all
-  @location.each do|park|
-  puts "#{park.index}. #{park.name}"
+  @parks = WisconsinParks::Parks.all
+  @parks.each do |park|
+    puts "#{park.index}. #{park.name}"
   end 
-
-end 
+  puts ""
+end
 
 def select_parks
-
-  user_input = nil
-
- while user_input != 'exit'
   parks_list
   user_input = gets.strip
-  input = user_input.to_i
 
-  if input.between?(1,@location.size)
-  park_details(@location[input - 1])
-  elsif !input.between?(1,@location.size) && input != 'exit'
-  puts "Please type a number between 1 and 4 or exit."
+  if user_input.to_i.between?(1,@parks.size)
+    park_details(@parks[user_input.to_i - 1])
+  elsif user_input == "exit"
+        goodbye
+  else
+    puts ""
+    puts "Sorry, entry not recognized, please try again and type the correct number of the park or exit"
+    puts ""
+    select_parks
   end 
-
- end 
 end 
 
 def park_details(park)
@@ -65,13 +63,15 @@ def park_details(park)
   user_input = gets.strip
   input = user_input.to_i
 
-   if input.between?(1,2)
+   if input.between?(1,2) 
     if input == 1
     puts "#{park.address}"
     elsif input == 2
     puts "#{park.directions}"
     end 
-   else 
+elsif user_input == "exit"
+    select_parks
+else 
    puts "Enter a number or exit"
   end 
  end 
@@ -79,6 +79,7 @@ end
 
 def goodbye
   puts "Thank you for visiting, until next time!"
+  exit
 end 
 
 end 
