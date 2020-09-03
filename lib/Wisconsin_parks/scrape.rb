@@ -26,8 +26,8 @@ def scrape_website
 end 
 
 def basic_information
-    @park_information.each do |i| #park_information returns a one big array with all 4 parks info
-      array = i.split(",")  
+    @park_information.each do |info| #park_information returns a one big array with all 4 parks info
+      array = info.split(",")  
       basic_info = Nokogiri::HTML(open(array[2]))
       address = basic_info.at("//div[@itemprop = 'address']").children.text.squeeze
       directions = basic_info.search("div.directions span").text
