@@ -4,12 +4,11 @@ class WisconsinParks::CLI
   attr_accessor :parks
 
 def start
-  parks = WisconsinParks::Scrape.new
-  parks.scrape_website
-  parks.basic_information   
+  park = WisconsinParks::Scrape.new
+  park.scrape_website
+  park.basic_information   
   welcome
   select_parks
-  goodbye
 end 
 
 def welcome
@@ -41,16 +40,16 @@ def select_parks
         goodbye
   else
     puts ""
-    puts "Sorry, entry not recognized, please try again and type the correct number of the park or exit"
+    puts "Sorry, entry not recognized, please try again and type the correct number of the park or exit."
     puts ""
     select_parks
   end 
 end 
 
 def park_details(park)
-
   puts ""
   puts "#{park.name} seems like a fun place to visit."
+
   puts ""
   puts "Please enter a number to obtain address, get directions or type exit to select another park."
   puts ""

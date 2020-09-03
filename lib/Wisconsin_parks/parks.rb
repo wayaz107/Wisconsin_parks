@@ -5,11 +5,11 @@ class WisconsinParks::Parks
   @@all = []
 
 
-def initialize(index, name , address, directions)
+def initialize(index, name, address, directions)
   @index = index
   @name = name 
-  @directions = directions
   @address = address
+  @directions = directions
   save 
 end 
 
