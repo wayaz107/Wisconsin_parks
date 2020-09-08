@@ -2,14 +2,12 @@ require 'open-uri'
 require 'pry'
 
 class WisconsinParks::Scrape
-  attr_accessor :park_information, :park_website
 
 
 def initialize
   @park_website = "https://www.nps.gov/state/wi/list.htm?program=parks"
   @park_information = []
 end 
-
 
 def scrape_website
   html = open(@park_website)

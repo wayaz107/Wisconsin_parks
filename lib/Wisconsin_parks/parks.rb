@@ -1,6 +1,6 @@
 class WisconsinParks::Parks
 
-  attr_accessor :name, :directions, :index, :address 
+  attr_reader :name, :directions, :index, :address 
 
   @@all = []
 
@@ -12,7 +12,6 @@ def initialize(index, name, address, directions)
   @directions = directions
   save 
 end 
-
 
 def save
   @@all << self

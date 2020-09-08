@@ -1,7 +1,6 @@
 
 class WisconsinParks::CLI
 
-  attr_accessor :parks
 
 def start
   park = WisconsinParks::Scrape.new
@@ -19,6 +18,7 @@ def welcome
   puts ""
 end 
 
+
 def parks_list
   puts ""
   puts "Please type the number of the park you want more information about or type exit."
@@ -28,7 +28,7 @@ def parks_list
     puts "#{park.index}. #{park.name}"
   end 
   puts ""
-end
+end 
 
 def select_parks
   parks_list
